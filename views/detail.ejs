@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+<body class="grey-bg">
+
+    <%- include('nav.ejs') %>
+
+    <div class="detail-bg">
+        <h4><%= 글.title%></h4>
+        <p><%= 글.content%></p>
+        <img src="<%= 글.img%>">
+    </div> 
+
+    
+</body>
+</html>

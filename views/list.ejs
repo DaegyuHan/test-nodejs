@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="/main.css" rel="stylesheet">
+</head>
+
+<body class="grey-bg">
+
+  <%- include('nav.ejs') %>
+
+    <div class="white-bg">
+      <% for (let i=0; i<글목록.length; i++){ %>
+        <div class="list-box">
+          <h4>
+            <a style="text-decoration : none" href="/detail/<%= 글목록[i]._id%>">
+              <%= 글목록[i].title%>
+            </a>
+            <a href="/edit/<%= 글목록[i]._id%>">✏️</a>
+            <span class="delete" data-id="<%= 글목록[i]._id%>">🗑️</span>
+          </h4>
+          <p>
+            <%= 글목록[i].content%>
+          </p>
+        </div>
+        <% } %>
+    </div>
+    <a href="/list/next/<%= 글목록[글목록.length-1]._id%>">다음</a>
+
+
+    <script>
+      for (let i = 0; i < '<%= 글목록.length %>'; i++) {
+        document.querySelectorAll('.delete')[i].addEventListener('click', function (e) {
+
+          fetch('/delete?docid=' + e.target.dataset.id, {
+            method: 'DELETE',
+          })
+            .then((r) => { r.text() })
+            // 서버가 보낸 데이터 data
+            .then((data) => {
+              //삭제 시 새로고침해야 post가 사라진다, 그래서 숨겨버리기
+              e.target.parentElement.parentElement.style.display = 'none'
+            })
+        })
+
+
+      }
+
+    </script>
+
+
+</body>
+
+</html>
