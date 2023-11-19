@@ -5,6 +5,7 @@ body {
 a:hover {
   color: pink;
 }
+
 a {
   color: black;
 }
@@ -84,6 +85,32 @@ div {
   padding: 15px;
   margin-top: 10px;
 }
+
 .delete {
   cursor: pointer;
 }
+
+
+/* 이미지 스타일 */
+img {
+  max-width: 500px;
+  /* 최대 너비 */
+  max-height: 400px;
+  /* 최대 높이 */
+  width: auto;
+  /* 자동으로 너비 조절 */
+  height: auto;
+  /* 자동으로 높이 조절 */
+}
+
+.search {
+  margin-left: 20px;
+  padding: 5px;
+}
+.search-send {
+  padding: 6px 10px;
+  background: lightgray;
+  border: none;
+  border-radius: 5px;
+  vertical-align: middle;
+} 

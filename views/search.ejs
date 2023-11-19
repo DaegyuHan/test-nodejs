@@ -13,47 +13,37 @@
 
   <%- include('nav.ejs') %>
 
-
     <input class="search">
     <button class="search-send">검색</button>
-    <div style="width:500px; text-align: right;">
-      <%= 유저%>
-    </div>
 
     <script>
-      document.querySelector('.search-send').addEventListener('click', function () {
+      document.querySelector('.search-send').addEventListener('click', function(){
         let inputdata = document.querySelector('.search').value
         location.href = '/search?val=' + inputdata
       })
     </script>
 
+<h4>검색결과</h4>
 
     <div class="white-bg">
-      <% for (let i=글목록.length -1; i>=0; i--){ %>
+      <% for (let i=0; i<글목록.length; i++){ %>
         <div class="list-box">
           <h4>
-            <span style="font-size: 14px; color: gray;">
-              <%=i+1%>
-            </span>
             <a style="text-decoration : none" href="/detail/<%= 글목록[i]._id%>">
               <%= 글목록[i].title%>
             </a>
-            <!-- <a href="/edit/<%= 글목록[i]._id%>">✏️</a>
-            <span class="delete" data-id="<%= 글목록[i]._id%>">🗑️</span> -->
+            <a href="/edit/<%= 글목록[i]._id%>">✏️</a>
+            <span class="delete" data-id="<%= 글목록[i]._id%>">🗑️</span>
           </h4>
           <p>
             <%= 글목록[i].content%>
           </p>
-          <p>
-            <%= 글목록[i].username%>
-          </p>
         </div>
         <% } %>
     </div>
-    <a href="/list/next/<%= 글목록[글목록.length-1]._id%>">다음</a>
 
 
-    <!-- <script>
+    <script>
       for (let i = 0; i < '<%= 글목록.length %>'; i++) {
         document.querySelectorAll('.delete')[i].addEventListener('click', function (e) {
 
@@ -71,7 +61,7 @@
 
       }
 
-    </script> -->
+    </script>
 
 
 </body>

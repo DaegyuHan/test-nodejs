@@ -12,9 +12,10 @@
 
     <form class="form-box" action="/edit?_method=PUT" method="POST">
         <h4>수정하기</h4>
-        <input name="id" value="<%= result._id%>"> 
+        <input name="id" value="<%= result._id%>" style="display: none;"> 
         <input name="title" value="<%= result.title%>">
         <input name="content" value="<%= result.content%>">
+        <input type="file" name="img1" accept="image/*" multiple>
         <button type="submit">전송</button>
     </form> 
 
