@@ -151,13 +151,14 @@ app.post('/add', async (요청, 응답) => {
 app.get('/detail/:id', async (요청, 응답) => {
   let result1 = await db.collection('post').find().toArray();
   let result2 = await db.collection('comment').find({ parentId: new ObjectId(요청.params.id) }).toArray()
+  let result3 = 요청.user.username
 
   try {
     let result = await db.collection('post').findOne({ _id: new ObjectId(요청.params.id) })
     if (result == null) {
       응답.status(404).send('이상한 url 입력함')
     }
-    응답.render('detail.ejs', { 글목록: result1,  글: result, 댓글: result2 })
+    응답.render('detail.ejs', { 유저: result3, 글목록: result1,  글: result, 댓글: result2 })
   } catch (e) {
     console.log(e)
     응답.status(404).send('이상한 url 입력함')
@@ -186,12 +187,12 @@ app.put('/edit', async (요청, 응답) => {
 })
 
 
-app.delete('/delete', async (요청, 응답) => {
-  await db.collection('post').deleteOne({
-    _id: new ObjectId(요청.query.docid),
-    username: 요청.query.username
-  })
-  응답.send('삭제완료')
+app.get('/delete/:id', async (요청, 응답) => {
+  let result = await db.collection('post').deleteOne({
+    _id: new ObjectId(요청.params.id),
+    username: 요청.user.username
+  })  
+  응답.redirect('/list')
 })
 
 
@@ -297,6 +298,8 @@ app.post('/comment', async (요청, 응답) => {
   })
   응답.redirect('back')
 })
+
+
 
 
 app.get("/logout", function (요청, 응답) {

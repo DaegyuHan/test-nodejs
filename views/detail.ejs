@@ -16,24 +16,39 @@
             <h4>
                 <%= 글.title%>
             </h4>
-            <a href="/edit/<%= 글._id%>">수정</a>
-            <span class="delete" data-id="<%= 글._id%>">삭제</span>
+
             <p>
                 <%= 글.content%>
             </p>
             <img src="<%= 글.img%>">
+            <% if (글.username == 유저) { %>
+            <div>
+                <a href="/edit/<%= 글._id%>">수정</a>
+                <a href="/delete/<%= 글._id%>">삭제</a>
+            </div>
+            <%}%>
+            
 
             <hr style="margin-top: 60px">
-            <% for (let i = 0; i<댓글.length; i++){ %>
-            <div>
-                <p><strong><%= 댓글[i].writer %></strong> <%= 댓글[i].content%></p>
-            </div>
-            <% } %>
-            <form action="/comment" method="POST">
-                <input name="content">
-                <input name="parentId" value="<%= 글._id %>" style="display: none">
-                <button type="submit">댓글작성</button>
-            </form>
+            <% for (let i=0; i<댓글.length; i++){ %>
+                <div style="display: flex; align-items: baseline;">
+                    <p style="margin-right: 5px;"><strong>
+                            <%= 댓글[i].writer %>
+                        </strong>
+                        <%= 댓글[i].content%>
+                    </p>
+                    <% if (댓글[i].writer == 유저) { %>
+                    <a style="margin-left: 5px;">수정</a>
+                    <a href="/delete/comment" style="margin-left: 5px;">삭제</a>
+                    <% } %>
+                </div>
+                <% } %>
+
+                    <form action="/comment" method="POST">
+                        <input name="content">
+                        <input name="parentId" value="<%= 글._id %>" style="display: none">
+                        <button type="submit">댓글작성</button>
+                    </form>
         </div>
 
 
